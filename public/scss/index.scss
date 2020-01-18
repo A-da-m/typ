@@ -1,0 +1,67 @@
+$bg-dark: #262626;
+
+html {
+  box-sizing: normal !important;
+}
+
+body, html, .App, #root {
+  background-color: $bg-dark;
+  height: 105% !important;
+  overflow: hidden;
+}
+
+.file-cta, .file-name, .input, .select select, .textarea {
+  height: 3em;
+}
+
+.input, .select select, .textarea, .input:hover {
+  background-color: #000;
+  border-color: #000;
+  color: #ddd;
+}
+
+::placeholder {
+  color: gray !important;
+}
+.card:hover {
+  cursor: pointer;
+}
+
+.dropdown-item:hover, a.dropdown-item:hover, button.dropdown-item:hover {
+  background-color: #000;
+}
+
+.menu-list a:hover {
+  background-color: #000;
+  color: #ffff;
+}
+
+.image.is-256x256 {
+  height: 256px;
+  width: 256px;
+}
+
+.banner {
+  height: 360px;
+  width: 100%;
+}
+
+.bot-body {
+  padding: 5%;
+  margin-top: -125px;
+  padding-top: 0;
+}
+
+@media (max-width: 768px) {
+  .banner {
+    height: 200px;
+  }
+  .image.is-256x256 {
+    height: 180px;
+    width: 180px;
+  }
+  .bot-body {
+    margin-top: -125px;
+    padding: 10%;
+  }
+}
