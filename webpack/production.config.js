@@ -20,7 +20,7 @@ module.exports = {
   entry: [path.resolve(bin, 'client', 'index.jsx')],
   output: {
     path: path.resolve(bin, 'server', 'build'),
-    publicPath: '/react',
+    publicPath: '/app',
     filename: '[name].[contenthash:8].js',
     chunkFilename: '[name].[contenthash:8].chunk.js'
   },
