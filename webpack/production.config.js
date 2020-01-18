@@ -11,22 +11,23 @@ require('string.prototype.matchall').shim()
 
 process.env.NODE_ENV = 'production'
 
-const src = path.resolve(__dirname, '..', 'bin')
+const bin = path.resolve(__dirname, '..', 'bin')
+const publicPath = path.resolve(__dirname, '..', 'public')
 
 module.exports = {
   mode: 'production',
   name: 'client',
-  entry: [path.resolve(src, 'client', 'index.js')],
+  entry: [path.resolve(bin, 'client', 'index.jsx')],
   output: {
-    path: path.resolve(src, 'server', 'build'),
-    publicPath: '/app',
+    path: path.resolve(bin, 'server', 'build'),
+    publicPath: '/react',
     filename: '[name].[contenthash:8].js',
     chunkFilename: '[name].[contenthash:8].chunk.js'
   },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      assets: path.resolve(src, 'client', 'assets')
+      assets: path.resolve(bin, 'client', 'assets')
     }
   },
   optimization: {
@@ -67,7 +68,7 @@ module.exports = {
       { parser: { requireEnsure: false } },
       {
         test: /\.(js|jsx)$/,
-        include: path.resolve(src, 'client'),
+        include: path.resolve(bin, 'client'),
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,
@@ -107,7 +108,7 @@ module.exports = {
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: path.resolve(src, 'client', 'index.html'),
+      template: path.resolve(publicPath, 'index.html'),
       filename: 'index.html'
     }),
     new MiniCSSExtractPlugin({
@@ -124,7 +125,7 @@ module.exports = {
     {
       apply: (compiler) =>
         compiler.hooks.compile.tap('cleanBuild', () => {
-          const buildDir = path.resolve(src, 'server', 'build')
+          const buildDir = path.resolve(bin, 'server', 'build')
           for (const filename of fs.readdirSync(buildDir)) {
             fs.unlinkSync(path.resolve(buildDir, filename))
           }
@@ -133,23 +134,22 @@ module.exports = {
     {
       apply: (compiler) =>
         compiler.hooks.compile.tap('miscFiles', () => {
-          const appDir = path.resolve(src, 'client')
-          const buildDir = path.resolve(src, 'server', 'build')
+          const appDir = path.resolve(bin, 'client')
           const appFile = fs.readFileSync(path.resolve(appDir, 'App.jsx'), 'utf8')
 
-          const sitemapTemplate = fs.readFileSync(path.resolve(appDir, 'sitemap.xml'), 'utf8')
+          const sitemapTemplate = fs.readFileSync(path.resolve(publicPath, 'sitemap.xml'), 'utf8')
           let sitemapLocations = ''
           for (const [, match] of appFile.matchAll(/path="(.*?)"/g)) {
-            sitemapLocations += `<url><loc>https://points.city${match}</loc></url>`
+            sitemapLocations += `<url><loc>https://typapp.co${match}</loc></url>`
           }
 
           fs.writeFileSync(
-            path.resolve(buildDir, 'sitemap.xml'),
+            path.resolve(publicPath, 'sitemap.xml'),
             sitemapTemplate.replace('$locations', sitemapLocations)
           )
           fs.copyFileSync(
-            path.resolve(appDir, 'robots.txt'),
-            path.resolve(buildDir, 'robots.txt')
+            path.resolve(publicPath, 'robots.txt'),
+            path.resolve(publicPath, 'robots.txt')
           )
         })
     }

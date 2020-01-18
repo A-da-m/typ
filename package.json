@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node .",
     "build": "tsc --watch",
-    "webpack": "./node_modules/.bin/webpack-cli -p --config ./webpack/webpack.config.js --display-error-details",
+    "webpack": "tsc && ./node_modules/.bin/webpack-cli -p --config ./webpack/webpack.config.js --display-error-details",
     "sass": "sass src/public/css/sass:src/public/css/out",
     "dev": "node . --development"
   },
