@@ -15,20 +15,28 @@ class Add extends React.Component {
       long: null,
       short: null,
       invite: null,
-      errors: []
+      errors: [],
+      submitted: false
     }
     this.onSubmit = this.onSubmit.bind(this)
     this.onSave = this.onSave.bind(this)
   }
 
   onSubmit () {
-    console.log('Submitted')
     this.setState({ errors: [] })
     if (!this.state.id) return this.setState({ errors: this.state.errors.push('id') })
     if (!this.state.long) return this.setState({ errors: this.state.errors.push('long') })
     if (!this.state.short) return this.setState({ errors: this.state.errors.push('short') })
-    axios.post(`/v1/bots/${this.state.id}`, { description: { long: this.state.long, short: this.state.short }, public: true })
-      .then(result => console.log(result))
+    axios.post(`/v1/bots/${this.state.id}`, { description: { long: this.state.long, short: this.state.short }, public: true, invite: this.state.invite || null })
+      .then(result => {
+        this.setState({
+          id: null,
+          long: null,
+          short: null,
+          invite: null,
+          submitted: result.data
+        })
+      })
       .catch(error => console.error(error))
   }
 
@@ -37,8 +45,16 @@ class Add extends React.Component {
     if (!this.state.id) return this.setState({ errors: this.state.errors.push('id') })
     if (!this.state.long) return this.setState({ errors: this.state.errors.push('long') })
     if (!this.state.short) return this.setState({ errors: this.state.errors.push('short') })
-    axios.post(`/v1/bots/${this.state.id}`, { description: { long: this.state.long, short: this.state.short }, public: false })
-      .then(result => console.log(result))
+    axios.post(`/v1/bots/${this.state.id}`, { description: { long: this.state.long, short: this.state.short }, public: false, invite: this.state.invite || null })
+      .then(result => {
+        this.setState({
+          id: null,
+          long: null,
+          short: null,
+          invite: null,
+          submitted: result.data
+        })
+      })
       .catch(error => console.error(error))
   }
 
@@ -60,33 +76,32 @@ class Add extends React.Component {
           </section>
           <div style={{ marginBottom: '150px', padding: '5%', paddingTop: 30 }} className='columns'>
             <div className='column'>
+              {this.state.submitted ? <div className='notification is-primary is-light'>Successfully submitted: <strong>{this.state.submitted.username}#{this.state.submitted.discriminator}</strong></div> : <></>}
               <div className='field'>
                 <label className='label has-text-white'>Bot ID</label>
                 <div className='control'>
-                  <input className='input' type='text' placeholder='ID' onChange={(event) => this.setState({ id: event.target.value })} />
+                  <input className='input' type='text' value={this.state.id || ''} placeholder='ID' onChange={(event) => this.setState({ id: event.target.value })} />
                 </div>
               </div>
 
               <div className='field'>
                 <label className='label has-text-white'>Short Description</label>
                 <div className='control'>
-                  <input className='input' type='text' placeholder='Text' onChange={(event) => this.setState({ short: event.target.value })} />
+                  <input className='input' type='text' value={this.state.short || ''} placeholder='Text' onChange={(event) => this.setState({ short: event.target.value })} />
                 </div>
               </div>
 
               <div className='field'>
                 <label className='label has-text-white'>Long Description</label>
                 <div className='control'>
-                  <textarea className='textarea' placeholder='Text' onChange={(event) => this.setState({ long: event.target.value })}></textarea>
+                  <textarea className='textarea' value={this.state.long || ''} placeholder='Text' onChange={(event) => this.setState({ long: event.target.value })}></textarea>
                 </div>
               </div>
 
               <div className='field'>
+                <label className='label has-text-white'>Invite</label>
                 <div className='control'>
-                  <label className='checkbox has-text-white'>
-                    <input type='checkbox' style={{ marginRight: '5px' }} />
-                    I agree to the <a href='#'>terms and conditions</a>
-                  </label>
+                  <input className='input' type='text' value={this.state.invite || ''} placeholder='Invite URL' onChange={(event) => this.setState({ invite: event.target.value })} />
                 </div>
               </div>
 

@@ -55,7 +55,7 @@ export default async (): Promise<fastify.FastifyInstance<Server, IncomingMessage
         tokenPath: '/api/oauth2/token'
       }
     },
-    callbackUri: 'http://localhost:3000/auth/callback',
+    callbackUri: process.env.NODE_ENV === 'production' ? 'https://typapp.co/auth/callback' : 'http://localhost:3000/auth/callback',
     startRedirectPath: '/auth/login'
   })
 

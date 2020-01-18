@@ -35,10 +35,9 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
   })
 
   server.get('/logout', async (request, reply) => {
-    console.log(request.session)
     return request.sessionStore.destroy(request.session.sessionId, (error) => {
       if (error) return reply.send(error).code(500)
-      return reply.send({ session : request.session })
+      return reply.redirect('/')
     })
   })
 

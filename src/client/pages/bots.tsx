@@ -52,7 +52,6 @@ class Featured extends React.Component {
   }
 
   render () {
-    console.log(this.state.bots)
     return (
       <>
         <h1 className='has-text-white is-size-1' style={{ fontWeight: 900 }}>Bots</h1>

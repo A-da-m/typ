@@ -17,8 +17,6 @@ class Bot extends React.Component {
 
     axios.get(`/v1/bots/${id}`)
       .then(result => {
-
-        console.log(result.data)
         // const bots = result.data.filter((bot: any) => bot.featured)
         this.setState({
           bot: result.data?.bot,

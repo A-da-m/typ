@@ -15,7 +15,8 @@ const schema: mongoose.Schema = new mongoose.Schema({
   featured: Number,
   certified: Boolean,
   public: Boolean,
-  approved: Boolean
+  approved: Boolean,
+  invite: String
 })
 
 export default mongoose.model('bots', schema)

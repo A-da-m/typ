@@ -47,10 +47,11 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
           banner: null,
           featured: 0,
           certified: false,
+          invite: sanitize(request.body.invite || `https://discordapp.com/api/oauth2/authorize?client_id=${request.params.id}&permissions=0&scope=bot`),
           public: sanitize(request.body.public),
           approved: false
         })
-          .then(() => reply.code(204))
+          .then(() => reply.send({ username: data.username, discriminator: data.discriminator, id: request.params.id }).code(200))
           .catch(error => {
             console.log(error)
             return reply.send(error).code(500)
