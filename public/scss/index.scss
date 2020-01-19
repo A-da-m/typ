@@ -52,6 +52,10 @@ body, html, .App, #root {
   padding-top: 0;
 }
 
+.input:hover, .is-hovered.input, .is-hovered.textarea, .select select.is-hovered, .select select:hover, .textarea:hover {
+  border: 0;
+}
+
 @media (max-width: 768px) {
   .banner {
     height: 200px;
@@ -62,6 +66,44 @@ body, html, .App, #root {
   }
   .bot-body {
     margin-top: -125px;
-    padding: 10%;
+    padding-left: 20px;
+    padding-right: 20px;
   }
+
+  body, html, .App, #root {
+    height: 100% !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .navbar {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .navbar-burger {
+    margin-left: calc(100% - 34px);
+    cursor: pointer;
+  }
+
+  .navbar-menu {
+    background-color: transparent;
+  }
+
+  .navbar-item, .navbar-link {
+    color: #ddd;
+    padding-left: 0;
+  }
+
+  .navbar-link.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, a.navbar-item.is-active, a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover {
+    background-color: transparent;
+  }
+
+  .columns {
+    margin-left: 0;
+  }
+}
+
+strong {
+  color: #fff !important;
 }

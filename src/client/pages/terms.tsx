@@ -9,9 +9,9 @@ class Terms extends React.Component {
             <div className='container-fluid'>
               <h1 className='font-weight-bold'><strong>Terms of Service</strong></h1>
               <p className='text-muted'>Effective date: August 20, 2019</p>
-              <p>ATIK_TECH ("us", "we", or "our") operates the <a href='https://points.city'>points.city</a> website (hereinafter referred to as the "Service").</p>
+              <p>ATIK_TECH ("us", "we", or "our") operates the <a href='https://typapp.co'>typapp.co</a> website (hereinafter referred to as the "Service").</p>
               <h5>1. Terms</h5>
-              <p>By accessing the website at <a href='http://points.city'>http://points.city</a>, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this website are protected by applicable copyright and trademark law.</p>
+              <p>By accessing the website at <a href='https://typapp.co'>typapp.co</a>, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this website are protected by applicable copyright and trademark law.</p>
               <h5 className='font-weight-bold'>2. Use of Service and Creation of Content</h5>
               <ol type='a'>
                 <li>

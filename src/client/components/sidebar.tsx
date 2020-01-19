@@ -35,7 +35,7 @@ class Sidebar extends React.Component {
           </div>
         </div>
         {this.props.isAuthenticated ?
-        <div className={`dropdown ${this.state.dropdown ? 'is-active' : ''} is-right`} style={{ position: 'absolute', right: 25, top: 25, borderRadius: '25px', width: '3rem' }}>
+        <div className={`dropdown ${this.state.dropdown ? 'is-active' : ''} is-right`} style={{ position: 'absolute', right: 25, top: 25, borderRadius: '25px', width: '3rem', zIndex: 100 }}>
           <div className='dropdown-trigger'>
             <img style={{ borderRadius: '50%', cursor: 'pointer' }} onClick={() => this.setState({ dropdown: !this.state.dropdown })} src={this.props.user?.avatar ? `https://cdn.discordapp.com/avatars/${this.props.user.id}/${this.props.user.avatar}.png?size=256` : 'https://cdn.discordapp.com/embed/avatars/0.png'} />
           </div>
@@ -45,6 +45,9 @@ class Sidebar extends React.Component {
                 Logged in as <strong>{this.props.user.username}#{this.props.user.discriminator}</strong>
               </p>
               <hr className='dropdown-divider has-background-black-bis' />
+              <a href='/@me' className='dropdown-item has-text-white'>
+                My Account
+              </a>
               <a href='/bot' className='dropdown-item has-text-white'>
                 Add Bot
               </a>

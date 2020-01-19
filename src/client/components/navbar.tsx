@@ -8,14 +8,15 @@ class NavBar extends React.Component {
   constructor (props: any) {
     super(props)
     this.state = {
-      dropdown: false
+      dropdown: false,
+      loginDropdown: false
     }
   }
 
   render () {
     return (
       <div className='is-hidden-tablet'>
-        <div className='navbar is-black' style={{ paddingLeft: '10%', paddingRight: '10%' }}>
+        <div className='navbar is-black'>
           <div className='navbar-brand'>
             <a className='navbar-item has-text-weight-bold has-text-white' href='/' style={{ padding: 0, margin: 0, fontWeight: 900 }}>typ</a>
             <div className='navbar-burger burger' style={{ padding: 0, width: 'auto' }} onClick={() => this.setState({ dropdown: !this.state.dropdown })}>
@@ -29,6 +30,25 @@ class NavBar extends React.Component {
               <div className='navbar-start'>
                 <a className='navbar-item' href='/'>Bots</a>
                 <a className='navbar-item' href='/servers'>Servers</a>
+                {this.props.isAuthenticated ?
+                <div className='navbar-item has-dropdown is-hoverable'>
+                  <a className='navbar-link' onClick={() => this.setState({ loginDropdown: !this.state.loginDropdown })}>
+                    {this.props.user.username}#{this.props.user.discriminator}
+                  </a> {this.state.loginDropdown ?
+                  <div className='navbar-dropdown is-boxed'>
+                    <a className='navbar-item' href='/@me'>
+                      My Account
+                    </a>
+                    <a className='navbar-item' href='/bot'>
+                      Add Bot
+                    </a>
+                    <a className='navbar-item has-text-danger' href='/auth/logout'>
+                      Logout
+                    </a>
+                  </div>
+                  : <></>}
+                </div>
+                : <a className='navbar-item' href='/auth/login'>Login</a>}
               </div>
             </div>
           : ''}

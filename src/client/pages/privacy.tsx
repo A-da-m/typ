@@ -9,7 +9,7 @@ class Privacy extends React.Component {
             <div className='container-fluid'>
               <h1 className='font-weight-bold'><strong>Privacy Policy</strong></h1>
               <p className='text-muted'>Effective date: August 20, 2019</p>
-              <p>ATIK_TECH ("us", "we", or "our") operates the <a href='https://points.city'>points.city</a> website (hereinafter referred to as the "Service").</p>
+              <p>ATIK_TECH ("us", "we", or "our") operates the <a href='https://typapp.co'>typapp.co</a> website (hereinafter referred to as the "Service").</p>
               <p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.</p>
               <p>We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, accessible from https://points.city</p>
               <h3 className='font-weight-bold'>Information Collection And Use</h3>
@@ -93,7 +93,7 @@ class Privacy extends React.Component {
 
               <h3 className='font-weight-bold'>Contact Us</h3>
               <p>If you have any questions about this Privacy Policy, please contact us:</p>
-              <ul><li>By email: <a href='mailto:support@atiktech.co'>support@atiktech.co</a></li></ul>
+              <ul><li>By email: <a href='mailto:legal@atiktech.co'>legal@atiktech.co</a></li></ul>
             </div>
           </div>
         </section>

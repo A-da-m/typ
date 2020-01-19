@@ -4,8 +4,18 @@ class Servers extends React.Component {
   render () {
     return (
       <div className='column' style={{ height: '100%', padding: '5%', textAlign: 'center', marginTop: 'auto', marginBottom: 'auto' }}>
-        <h1 className='has-text-white is-size-1' style={{ fontWeight: 900 }}>Coming Soon</h1>
-        <h1 className='has-text-weight-normal has-text-grey-light is-size-3'>to a bot list near you!</h1>
+        <div className='hero is-fullheight'>
+          <div className='hero-body' style={{ padding: 0 }}>
+            <div className='container' style={{ top: '-50px' }}>
+              <h1 className='title has-text-white' style={{ fontSize: '50px', fontWeight: 900 }}>
+                Coming Soon
+              </h1>
+              <h2 className='subtitle has-text-grey'>
+                to a server list near you!
+              </h2>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

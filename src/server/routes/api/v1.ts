@@ -7,8 +7,22 @@ import sanitize from '../../sanitize'
 
 export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerResponse>, options: any, next: any) => {
   server.get('/bots', async (request: fastify.FastifyRequest, reply: fastify.FastifyReply<unknown>) => {
-    return bots.find({})
+    const query: any = {}
+    if (request.query.ownerID) query.ownerID = sanitize(request.query.ownerID)
+    return bots.find(query)
       .then(result => reply.send(result))
+      .catch(error => reply.send(error))
+  })
+
+  server.get('/users/:id', async (request: fastify.FastifyRequest, reply: fastify.FastifyReply<unknown>) => {
+    if (!request.params.id) return reply.send('Missing userID').code(400)
+    return users.findOne({ id: sanitize(request.params.id) })
+      .then(user => {
+        return bots.find({ ownerID: request.params.id })
+          .then(bots => {
+            return reply.send({ user, bots })
+          })
+      })
       .catch(error => reply.send(error))
   })
 
@@ -33,8 +47,9 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
       }
     })
       .then(({ data }) => {
-        return bots.create({
-          id: sanitize(request.params.id),
+        return bots.findOneAndUpdate({
+          id: sanitize(request.params.id)
+        }, {
           ownerID: sanitize(request.session.user?.id),
           username: sanitize(data.username),
           discriminator: sanitize(data.discriminator),
@@ -50,6 +65,8 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
           invite: sanitize(request.body.invite || `https://discordapp.com/api/oauth2/authorize?client_id=${request.params.id}&permissions=0&scope=bot`),
           public: sanitize(request.body.public),
           approved: false
+        }, {
+          upsert: true
         })
           .then(() => reply.send({ username: data.username, discriminator: data.discriminator, id: request.params.id }).code(200))
           .catch(error => {
