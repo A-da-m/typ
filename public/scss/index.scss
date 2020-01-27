@@ -76,7 +76,7 @@ body, html, .App, #root {
     overflow-x: hidden;
   }
 
-  .navbar {
+  .navbar-brand, .navbar-menu {
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -86,8 +86,13 @@ body, html, .App, #root {
     cursor: pointer;
   }
 
+  .nb {
+    margin-left: calc(100% - 56px);
+    cursor: pointer;
+  }
+
   .navbar-menu {
-    background-color: transparent;
+    background-color: #000000;
   }
 
   .navbar-item, .navbar-link {
@@ -101,6 +106,13 @@ body, html, .App, #root {
 
   .columns {
     margin-left: 0;
+    margin-right: 0;
+  }
+
+  .column {
+    padding: 0;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 

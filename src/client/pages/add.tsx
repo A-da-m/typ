@@ -15,6 +15,7 @@ class Add extends React.Component {
       long: null,
       short: null,
       invite: null,
+      banner: null,
       errors: [],
       submitted: false
     }
@@ -27,13 +28,14 @@ class Add extends React.Component {
     if (!this.state.id) return this.setState({ errors: this.state.errors.push('id') })
     if (!this.state.long) return this.setState({ errors: this.state.errors.push('long') })
     if (!this.state.short) return this.setState({ errors: this.state.errors.push('short') })
-    axios.post(`/v1/bots/${this.state.id}`, { description: { long: this.state.long, short: this.state.short }, public: true, invite: this.state.invite || null })
+    axios.post(`/v1/bots/${this.state.id}`, { description: { long: this.state.long, short: this.state.short }, public: true, invite: this.state.invite || null, banner: this.state.banner || null })
       .then(result => {
         this.setState({
           id: null,
           long: null,
           short: null,
           invite: null,
+          banner: null,
           submitted: result.data
         })
       })
@@ -45,13 +47,14 @@ class Add extends React.Component {
     if (!this.state.id) return this.setState({ errors: this.state.errors.push('id') })
     if (!this.state.long) return this.setState({ errors: this.state.errors.push('long') })
     if (!this.state.short) return this.setState({ errors: this.state.errors.push('short') })
-    axios.post(`/v1/bots/${this.state.id}`, { description: { long: this.state.long, short: this.state.short }, public: false, invite: this.state.invite || null })
+    axios.post(`/v1/bots/${this.state.id}`, { description: { long: this.state.long, short: this.state.short }, public: false, invite: this.state.invite || null, banner: this.state.banner || null })
       .then(result => {
         this.setState({
           id: null,
           long: null,
           short: null,
           invite: null,
+          banner: null,
           submitted: result.data
         })
       })
@@ -102,6 +105,13 @@ class Add extends React.Component {
                 <label className='label has-text-white'>Invite</label>
                 <div className='control'>
                   <input className='input' type='text' value={this.state.invite || ''} placeholder='Invite URL' onChange={(event) => this.setState({ invite: event.target.value })} />
+                </div>
+              </div>
+
+              <div className='field'>
+                <label className='label has-text-white'>Banner</label>
+                <div className='control'>
+                  <input className='input' type='text' value={this.state.banner || ''} placeholder='Banner' onChange={(event) => this.setState({ banner: event.target.value })} />
                 </div>
               </div>
 

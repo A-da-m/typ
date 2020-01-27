@@ -20,7 +20,8 @@ const schema: mongoose.Schema = new mongoose.Schema({
   avatar: String,
   favorites: [favorites],
   collections: [collections],
-  certified: Boolean
+  certified: { type: Boolean, default: false },
+  admin: { type: Number, default: 0 }
 })
 
 export default mongoose.model('users', schema)

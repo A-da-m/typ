@@ -11,7 +11,7 @@ class Servers extends React.Component {
                 Coming Soon
               </h1>
               <h2 className='subtitle has-text-grey'>
-                to a server list near you!
+                to a bot list near you!
               </h2>
             </div>
           </div>

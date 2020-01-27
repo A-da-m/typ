@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRobot, faUsers, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faRobot, faUsers, faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 
 class Sidebar extends React.Component {
@@ -45,7 +45,7 @@ class Sidebar extends React.Component {
                 Logged in as <strong>{this.props.user.username}#{this.props.user.discriminator}</strong>
               </p>
               <hr className='dropdown-divider has-background-black-bis' />
-              <a href='/@me' className='dropdown-item has-text-white'>
+              <a href={`/user/${this.props.user.id}`} className='dropdown-item has-text-white'>
                 My Account
               </a>
               <a href='/bot' className='dropdown-item has-text-white'>
@@ -58,7 +58,7 @@ class Sidebar extends React.Component {
             </div>
           </div>
         </div>
-        : <></>}
+        : <a href='/auth/login' className='has-text-white'><FontAwesomeIcon style={{ position: 'absolute', right: 25, top: 25, borderRadius: '25px', width: '3rem', zIndex: 100 }} icon={faUser} size='2x'/></a>}
       </div>
     )
   }

@@ -40,6 +40,7 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
   })
 
   server.post('/bots/:id', async (request: fastify.FastifyRequest, reply: fastify.FastifyReply<unknown>) => {
+    if (!request.session?.user) return reply.send('Unauthorized').code(401)
     if (!request.params.id || !request.body.description?.short || !request.body.description?.long) return reply.send('Missing content').code(400)
     return axios.get(`https://discordapp.com/api/users/${request.params.id}`, {
       headers: {
@@ -59,7 +60,7 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
             short: sanitize(request.body.description.short),
             long: sanitize(request.body.description.long)
           },
-          banner: null,
+          banner: sanitize(request.body.banner) || null,
           featured: 0,
           certified: false,
           invite: sanitize(request.body.invite || `https://discordapp.com/api/oauth2/authorize?client_id=${request.params.id}&permissions=0&scope=bot`),
@@ -80,5 +81,23 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
       })
   })
 
+  server.get('/admins', async (request: fastify.FastifyRequest, reply: fastify.FastifyReply<unknown>) => {
+    return users.find({ admin: { $gt: 0 } }).then(admins => reply.send({ admins }))
+  })
+
+  server.get('/admins/:id', async (request: fastify.FastifyRequest, reply: fastify.FastifyReply<unknown>) => {
+    return users.findOne({ id: sanitize(request.params.id), admin: { $gt: 0 } }).then(admin => reply.send({ admin }))
+  })
+
+  server.post('/admin/bots/:id/:status', async (request: fastify.FastifyRequest, reply: fastify.FastifyReply<unknown>) => {
+    if (!request.session?.user) return reply.send('Unauthorized').code(401)
+    // tslint:disable-next-line: await-promise
+    const user: any = await users.findOne({ id: sanitize(request.session.user.id) })
+    if (!user?.admin) return reply.send('Unauthorized').code(401)
+    if (!request.params.id || !request.params.status) return reply.send('Missing content').code(400)
+    return bots.findOneAndUpdate({ id: sanitize(request.params.id) }, { approved: request.params.status === 'approved' })
+      .then(() => reply.code(204))
+      .catch(error => reply.send(error).code(500))
+  })
   next()
 }

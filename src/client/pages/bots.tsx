@@ -9,7 +9,7 @@ import axios from 'axios'
 const Bot = ({ bot }: any) => {
   const history = useHistory()
   return (
-    <div className='column is-4'>
+    <div className='column is-full-mobile is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd'>
       <div className='card' style={{ borderRadius: '12px', backgroundColor: '#171717' }} onClick={() => history.push(`/bot/${bot.id}`)}>
         {/* <img src='/images/Adam.png' width='160' style={{ height: '100%', borderTopLeftRadius: '12px', borderBottomLeftRadius: '12px' }}/> */}
         <div className='card-content'>
@@ -20,8 +20,8 @@ const Bot = ({ bot }: any) => {
               </figure>
             </div>
             <div className='media-content' style={{ marginTop: 'auto', marginBottom: 'auto' }}>
-              <p className='title is-4 has-text-white' style={{ fontWeight: 900 }}>{bot.username} {bot.certified ? <FontAwesomeIcon icon={faCertificate}/> : <></>}</p>
-              <p className='subtitle is-6 has-text-grey'>{bot.description.short}</p>
+              <p className='title is-4 has-text-white' style={{ WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden', display: '-webkit-box', fontWeight: 900 }}>{bot.username} {bot.certified ? <FontAwesomeIcon icon={faCertificate}/> : <></>}</p>
+              <p className='subtitle is-6 has-text-grey' style={{ WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', display: '-webkit-box' }}>{bot.description.short}</p>
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@ class Featured extends React.Component {
     return (
       <>
         <h1 className='has-text-white is-size-1' style={{ fontWeight: 900 }}>Bots</h1>
-        <div className='columns' style={{ marginTop: 0, display: 'flex', overflowX: 'scroll', width: '100%' }}>
+        <div className='columns is-multiline'>
           {this.state.bots.map((bot: any) => <Bot key={bot.id} bot={bot}/>)}
         </div>
       </>

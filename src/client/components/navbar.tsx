@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRobot, faUsers, faSearch, faHamburger } from '@fortawesome/free-solid-svg-icons'
 
 class NavBar extends React.Component {
   props: any
@@ -16,17 +18,13 @@ class NavBar extends React.Component {
   render () {
     return (
       <div className='is-hidden-tablet'>
-        <div className='navbar is-black'>
-          <div className='navbar-brand'>
-            <a className='navbar-item has-text-weight-bold has-text-white' href='/' style={{ padding: 0, margin: 0, fontWeight: 900 }}>typ</a>
-            <div className='navbar-burger burger' style={{ padding: 0, width: 'auto' }} onClick={() => this.setState({ dropdown: !this.state.dropdown })}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
+        <div className='navbar is-black' style={{ height: '70px' }}>
+          <div className='navbar-brand' style={{ height: '100%', display: 'flex' }}>
+            <a className='navbar-item has-text-weight-bold has-text-white' href='/' style={{ padding: 0, margin: 0, fontWeight: 900, fontSize: 20, height: '100%' }}>typ</a>
+            <span className='nb'><a className='navbar-item has-text-weight-bold has-text-white' onClick={() => this.setState({ dropdown: !this.state.dropdown })} style={{ padding: 0, margin: 0, fontWeight: 900, fontSize: 20, height: '100%' }}><FontAwesomeIcon icon={faHamburger} /></a></span>
           </div>
           {this.state.dropdown ?
-            <div id='navbarExampleTransparentExample' className='navbar-menu is-active'>
+            <div id='navbarExampleTransparentExample' className='navbar-menu is-active has-background-grey' onClick={() => this.setState({ loginDropdown: !this.state.loginDropdown })}>
               <div className='navbar-start'>
                 <a className='navbar-item' href='/'>Bots</a>
                 <a className='navbar-item' href='/servers'>Servers</a>
