@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCertificate } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import Title from '../components/title'
 
 const Bot = ({ bot }: any) => {
   const history = useHistory()

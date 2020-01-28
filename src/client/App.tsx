@@ -11,7 +11,6 @@ import '../../public/scss/index.scss'
 import Sidebar from './components/sidebar'
 import Navbar from './components/navbar'
 import Private from './components/private'
-import Title from './components/title'
 
 const Bots = React.lazy(() => import('./pages/bots'))
 const Servers = React.lazy(() => import('./pages/servers'))
@@ -32,12 +31,6 @@ class App extends React.Component {
         <Router>
           <Navbar />
           <div className='App columns is-fullheight'>
-            <Title
-              title={null}
-              description={null}
-              url={null}
-              image={null}
-            />
             <Sidebar />
             <Switch>
               <React.Suspense fallback={<div></div>}>

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCertificate } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import Title from '../components/title'
 
 const Bot = ({ bot }: any) => {
   const history = useHistory()
@@ -79,11 +80,19 @@ class Bots extends React.Component {
 
   render () {
     return (
-      <div className='column' style={{ height: '100%', padding: '5%' }}>
-        <h1 className='has-text-weight-normal has-text-grey-light is-size-3'>{this.props.loading ? <></> : <>Hello <strong className='has-text-grey-light has-text-weight-bold'>{this.props.isAuthenticated ? `${this.props.user.username}#${this.props.user.discriminator}` : 'there'}</strong>!</>}</h1>
-        <Featured />
-        {/* <Trending /> */}
-      </div>
+      <>
+        <Title
+          title={null}
+          description={null}
+          url={null}
+          image={null}
+        />
+        <div className='column' style={{ height: '100%', padding: '5%' }}>
+          <h1 className='has-text-weight-normal has-text-grey-light is-size-3'>{this.props.loading ? <></> : <>Hello <strong className='has-text-grey-light has-text-weight-bold'>{this.props.isAuthenticated ? `${this.props.user.username}#${this.props.user.discriminator}` : 'there'}</strong>!</>}</h1>
+          <Featured />
+          {/* <Trending /> */}
+        </div>
+      </>
     )
   }
 }
