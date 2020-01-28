@@ -49,7 +49,12 @@ class Bot extends React.Component {
   render () {
     return (
       <>
-        <Title title={this.state.bot ? this.state.bot.username : 'Loading'} />
+        <Title
+          title={this.state.bot ? this.state.bot.username : 'Loading'}
+          description={this.state.bot ? this.state.bot.description : 'Loading'}
+          url={this.state.bot ? `https://typapp.co/${this.state.bot.id}` : 'https://typapp.co'}
+          image={this.state.bot ? `https://cdn.discordapp.com/avatars/${this.state.bot.id}/${this.state.bot.avatar}.png?size=256` : null}
+        />
         <div className='column' style={{ paddingLeft: 0, overflowY: 'scroll' }}>
           {this.state.bot ?
             <>
