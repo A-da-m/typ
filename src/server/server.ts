@@ -86,7 +86,7 @@ export default async (): Promise<fastify.FastifyInstance<Server, IncomingMessage
           data = data.replace(new RegExp('__DESCRIPTION__', 'g'), bot.description.short)
           data = data.replace(new RegExp('__URL__', 'g'), `https://typapp.co/bot/${bot.id}`)
           data = data.replace(new RegExp('__IMAGE__', 'g'), bot.banner)
-          return reply.send(data)
+          return reply.type('text/html').send(data)
         })
       }
       return fs.readFile(page, 'utf8', (error, data) => {
@@ -94,7 +94,7 @@ export default async (): Promise<fastify.FastifyInstance<Server, IncomingMessage
         data = data.replace(new RegExp('__TITLE__', 'g'), 'typ')
         data = data.replace(new RegExp('__DESCRIPTION__', 'g'), 'Bot Lists. Reinvented.')
         data = data.replace(new RegExp('__URL__', 'g'), 'https://typapp.co')
-        return reply.send(data)
+        return reply.type('text/html').send(data)
       })
     })
     next()
