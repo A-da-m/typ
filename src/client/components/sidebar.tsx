@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
 
   render () {
     return (
-      <div className='column is-narrow has-background-black has-text-centered is-fullheight is-hidden-mobile' style={{ height: '100%', paddingRight: 0, paddingTop: '3%' }}>
+      <div className='column is-narrow has-background-black has-text-centered is-fullheight is-hidden-mobile' style={{ height: '100%', paddingRight: 0, paddingLeft: 0, paddingTop: '3%' }}>
         <div style={{ width: '110px' }}>
           <div style={{ display: 'block' }}>
             <h3 className='has-text-weight-bold has-text-white is-size-4'>typ</h3>

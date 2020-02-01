@@ -79,7 +79,7 @@ export default async (): Promise<fastify.FastifyInstance<Server, IncomingMessage
       const page = path.join(__dirname, 'build', 'index.html')
       if (request.req.url.includes('/bot/')) {
         // tslint:disable-next-line: await-promise
-        const bot: any = await bots.findOne({ id: sanitize(request.req.url.replace('/bot/', '')) })
+        const bot: any = await bots.findOne({ id: sanitize(request.req.url.replace('/bot/', '').replace('/manage', '')) })
         return fs.readFile(page, 'utf8', (error, data) => {
           if (error) return reply.code(500).send({ error })
           data = data.replace(new RegExp('__TITLE__', 'g'), `${bot.username} - typ`)

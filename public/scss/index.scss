@@ -6,8 +6,9 @@ html {
 
 body, html, .App, #root {
   background-color: $bg-dark;
-  height: 105% !important;
+  height: 100% !important;
   overflow: hidden;
+  margin: 0;
 }
 
 .file-cta, .file-name, .input, .select select, .textarea {
@@ -56,6 +57,12 @@ body, html, .App, #root {
   border: 0;
 }
 
+@media (width: 1440px) {
+  .column.is-one-quarter-fullhd {
+    width: 33.3333%;
+  }
+}
+
 @media (max-width: 768px) {
   .banner {
     height: 200px;
@@ -85,6 +92,7 @@ body, html, .App, #root {
     margin-left: calc(100% - 34px);
     cursor: pointer;
   }
+
 
   .nb {
     margin-left: calc(100% - 56px);

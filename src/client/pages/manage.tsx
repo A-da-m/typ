@@ -55,7 +55,7 @@ class Manage extends React.Component {
     this.setState({ errors: [] })
     if (!this.state.long) return this.setState({ errors: this.state.errors.push('long') })
     if (!this.state.short) return this.setState({ errors: this.state.errors.push('short') })
-    axios.post(`/v1/bots/${this.state.id}`, { description: { long: this.state.long, short: this.state.short }, public: false, invite: this.state.invite || null, banner: this.state.banner || null })
+    axios.post(`/v1/bots/${this.state.id}`, { description: { long: this.state.long, short: this.state.short }, public: false, invite: this.state.invite || null, banner: this.state.banner || null, new: false })
       .then(result => {
         this.setState({
           long: null,
@@ -70,7 +70,7 @@ class Manage extends React.Component {
 
   render () {
     return (
-      <div className='column' style={{ paddingLeft: 0, overflowY: 'scroll' }}>
+      <div className='column' style={{ padding: 0, overflowY: 'scroll' }}>
         <div style={{ overflowY: 'scroll' }}>
           <section className='hero is-medium is-primary is-bold'>
             <div className='hero-body' style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: '8rem', paddingBottom: '8rem' }}>

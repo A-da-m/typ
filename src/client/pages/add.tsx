@@ -47,7 +47,7 @@ class Add extends React.Component {
     if (!this.state.id) return this.setState({ errors: this.state.errors.push('id') })
     if (!this.state.long) return this.setState({ errors: this.state.errors.push('long') })
     if (!this.state.short) return this.setState({ errors: this.state.errors.push('short') })
-    axios.post(`/v1/bots/${this.state.id}`, { description: { long: this.state.long, short: this.state.short }, public: false, invite: this.state.invite || null, banner: this.state.banner || null })
+    axios.post(`/v1/bots/${this.state.id}`, { description: { long: this.state.long, short: this.state.short }, public: false, invite: this.state.invite || null, banner: this.state.banner || null, new: true })
       .then(result => {
         this.setState({
           id: null,

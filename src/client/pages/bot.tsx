@@ -55,7 +55,7 @@ class Bot extends React.Component {
           url={this.state.bot ? `https://typapp.co/${this.state.bot.id}` : null}
           image={this.state.bot ? `https://cdn.discordapp.com/avatars/${this.state.bot.id}/${this.state.bot.avatar}.png?size=256` : null}
         />
-        <div className='column' style={{ paddingLeft: 0, overflowY: 'scroll' }}>
+        <div className='column' style={{ paddingLeft: 0, overflowY: 'scroll', padding: 0 }}>
           {this.state.bot ?
             <>
               <div style={{ overflowY: 'scroll' }}>

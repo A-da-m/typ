@@ -41,16 +41,14 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
 
   server.post('/bots/:id', async (request: fastify.FastifyRequest, reply: fastify.FastifyReply<unknown>) => {
     if (!request.session?.user) return reply.send('Unauthorized').code(401)
-    if (!request.params.id || !request.body.description?.short || !request.body.description?.long) return reply.send('Missing content').code(400)
+    if (!request.params.id || !request.body.description?.short || !request.body.description?.long || request.body.new) return reply.send('Missing content').code(400)
     return axios.get(`https://discordapp.com/api/users/${request.params.id}`, {
       headers: {
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`
       }
     })
       .then(({ data }) => {
-        return bots.findOneAndUpdate({
-          id: sanitize(request.params.id)
-        }, {
+        const query: any = {
           ownerID: sanitize(request.session.user?.id),
           username: sanitize(data.username),
           discriminator: sanitize(data.discriminator),
@@ -65,8 +63,18 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
           certified: false,
           invite: sanitize(request.body.invite || `https://discordapp.com/api/oauth2/authorize?client_id=${request.params.id}&permissions=0&scope=bot`),
           public: sanitize(request.body.public),
-          approved: false
-        }, {
+          approved: false,
+          date: new Date()
+        }
+        if (!request.body.new) {
+          delete query.approved
+          delete query.date
+          delete query.certified
+          delete query.featured
+        }
+        return bots.findOneAndUpdate({
+          id: sanitize(request.params.id)
+        }, query, {
           upsert: true
         })
           .then(() => reply.send({ username: data.username, discriminator: data.discriminator, id: request.params.id }).code(200))

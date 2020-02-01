@@ -16,7 +16,8 @@ const schema: mongoose.Schema = new mongoose.Schema({
   certified: Boolean,
   public: Boolean,
   approved: Boolean,
-  invite: String
+  invite: String,
+  date: Date
 })
 
 export default mongoose.model('bots', schema)
