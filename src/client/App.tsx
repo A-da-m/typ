@@ -20,6 +20,7 @@ const Bot = React.lazy(() => import('./pages/bot'))
 const Add = React.lazy(() => import('./pages/add'))
 const User = React.lazy(() => import('./pages/user'))
 const Manage = React.lazy(() => import('./pages/manage'))
+const Queue = React.lazy(() => import('./pages/queue'))
 
 // @ts-ignore
 store.dispatch(fetchState())
@@ -43,6 +44,7 @@ class App extends React.Component {
                 <Route exact component={Bot} path='/bot/:id' />
                 <Private exact component={Add} path='/bot' />
                 <Private exact component={Manage} path='/bot/:id/manage' />
+                <Private exact admin component={Queue} path='/queue' />
               </React.Suspense>
             </Switch>
           </div>

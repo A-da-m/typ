@@ -2,6 +2,7 @@ import fastify from 'fastify'
 import fastifyStatic from 'fastify-static'
 import fastifySession from 'fastify-session'
 import fastifyCookie from 'fastify-cookie'
+import fastifyRatelimit from 'fastify-rate-limit'
 
 import { Server, IncomingMessage, ServerResponse } from 'http'
 
@@ -42,6 +43,10 @@ export default async (): Promise<fastify.FastifyInstance<Server, IncomingMessage
     secret: process.env.SECRET_TOKEN,
     store: Store(fastifySession),
     saveUninitialized: false
+  })
+  server.register(fastifyRatelimit, {
+    max: 100,
+    timeWindow: '1 minute'
   })
   server.register(oauth2, {
     name: 'discordOAuth2',

@@ -40,6 +40,7 @@ class NavBar extends React.Component {
                     <a className='navbar-item' href='/bot'>
                       Add Bot
                     </a>
+                    {this.props.user.admin ? <a className='navbar-item' href='/bot'>Queue</a> : <></>}
                     <a className='navbar-item has-text-danger' href='/auth/logout'>
                       Logout
                     </a>

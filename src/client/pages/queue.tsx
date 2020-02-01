@@ -30,7 +30,7 @@ const Bot = ({ bot }: any) => {
   )
 }
 
-class Featured extends React.Component {
+class Queue extends React.Component {
   props: any
   state: any
 
@@ -43,8 +43,8 @@ class Featured extends React.Component {
 
     axios.get('/v1/bots')
       .then(result => {
-        const bots = result.data.filter((bot: any) => bot.approved && bot.featured)
-        bots.sort((a: any, b: any) => a.featured - b.featured)
+        const bots = result.data.filter((bot: any) => !bot.approved)
+        bots.sort((a: any, b: any) => b.date - a.date)
         this.setState({
           bots: bots
         })
@@ -55,7 +55,7 @@ class Featured extends React.Component {
   render () {
     return (
       <>
-        <h1 className='has-text-white is-size-1' style={{ fontWeight: 900 }}>Featured</h1>
+        <h1 className='has-text-white is-size-3' style={{ fontWeight: 900, marginBottom: '10px' }}>Queue</h1>
         <div className='columns is-multiline'>
           {this.state.bots.map((bot: any) => <Bot key={bot.id} bot={bot}/>)}
         </div>
@@ -64,7 +64,7 @@ class Featured extends React.Component {
   }
 }
 
-class RecentlyAdded extends React.Component {
+class AllBots extends React.Component {
   props: any
   state: any
 
@@ -89,27 +89,13 @@ class RecentlyAdded extends React.Component {
   render () {
     return (
       <>
-        <h1 className='has-text-white is-size-3' style={{ fontWeight: 900, marginBottom: '10px' }}>Recently Added</h1>
+        <h1 className='has-text-white is-size-3' style={{ fontWeight: 900, marginBottom: '10px' }}>Bots</h1>
         <div className='columns is-multiline'>
           {this.state.bots.map((bot: any) => <Bot key={bot.id} bot={bot}/>)}
         </div>
       </>
     )
   }
-}
-
-const Trending = (props: any) => {
-  return (
-    <>
-      <h1 className='has-text-white is-size-3' style={{ fontWeight: 900, marginBottom: '10px' }}>Trending</h1>
-      <div className='card' style={{ borderRadius: '12px', backgroundColor: '#171717', marginBottom: '20px' }}>
-        <div className='card-content'>
-          <p className='title is-4 has-text-white' style={{ fontWeight: 900 }}>Coming Soon</p>
-          <p className='subtitle is-6 has-text-grey'>Our team is working hard to bring you the Trending section.</p>
-        </div>
-      </div>
-    </>
-  )
 }
 
 class Bots extends React.Component {
@@ -125,10 +111,9 @@ class Bots extends React.Component {
           image={null}
         />
         <div className='column' style={{ height: '100%', padding: '5%', overflowY: 'scroll' }}>
-          <h1 className='has-text-weight-normal has-text-grey-light is-size-3'>{this.props.loading ? <></> : <>Hello <strong className='has-text-grey-light has-text-weight-bold'>{this.props.isAuthenticated ? `${this.props.user.username}#${this.props.user.discriminator}` : 'there'}</strong>!</>}</h1>
-          <Featured />
-          <Trending />
-          <RecentlyAdded />
+          <h1 className='has-text-weight-normal has-text-grey-light is-size-3'>Admin</h1>
+          <Queue />
+          <AllBots />
         </div>
       </>
     )

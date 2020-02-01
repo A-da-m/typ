@@ -9,6 +9,7 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
   server.get('/bots', async (request: fastify.FastifyRequest, reply: fastify.FastifyReply<unknown>) => {
     const query: any = {}
     if (request.query.ownerID) query.ownerID = sanitize(request.query.ownerID)
+    if (request.query.search) query.$text = { $search: sanitize(request.query.search) }
     return bots.find(query)
       .then(result => reply.send(result))
       .catch(error => reply.send(error))
@@ -18,7 +19,7 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
     if (!request.params.id) return reply.send('Missing userID').code(400)
     return users.findOne({ id: sanitize(request.params.id) })
       .then(user => {
-        return bots.find({ ownerID: request.params.id })
+        return bots.find({ ownerID: sanitize(request.params.id) })
           .then(bots => {
             return reply.send({ user, bots })
           })
@@ -81,10 +82,10 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
             new hookcord.Hook()
               .login(process.env.HOOK_ID, process.env.HOOK_SECRET)
               .setPayload({
-                'content': '<@&666799016679309312>',
+                'content': request.body.new ? '<@&666799016679309312>' : '',
                 'embeds': [{
                   'title': request.body.new ? '**Bot Added**' : '**Bot Updated**',
-                  'description': `<@${request.session.user.id}> \`${request.session.user.username}#${request.session.user.discriminator}\` added <@${data.id}> \`${data.username}#${data.discriminator}\``,
+                  'description': `<@${request.session.user.id}> \`${request.session.user.username}#${request.session.user.discriminator}\` ${request.body.new ? 'added' : 'updated'} <@${data.id}> \`${data.username}#${data.discriminator}\``,
                   'fields': [{
                     'name': 'Description',
                     'value': request.body.description.short,

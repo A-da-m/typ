@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import axios from 'axios'
-import { markdown } from 'markdown'
+import { toHTML } from 'discord-markdown'
 import Title from '../components/title'
 import { connect } from 'react-redux'
 
@@ -73,7 +73,7 @@ class Bot extends React.Component {
                     {this.props.isAuthenticated && this.props.user?.admin > 0 ? (this.state.bot.approved ? <a onClick={this.onRemoveClick}><span className='tag is-danger' style={{ marginLeft: 5 }}>Remove</span></a> : <a onClick={this.onApproveClick}><span className='tag is-success' style={{ marginLeft: 5 }}>Approve</span></a>) : <></>}
                   </p>
                   <br />
-                  <p className='has-text-grey-lighter' dangerouslySetInnerHTML={{ __html: markdown.toHTML(this.state.bot.description.long) }}></p>
+                  <p className='has-text-grey-lighter' dangerouslySetInnerHTML={{ __html: toHTML(this.state.bot.description.long) }}></p>
                 </div>
               </div>
             </>

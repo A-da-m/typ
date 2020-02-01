@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const schema: mongoose.Schema = new mongoose.Schema({
   id: String,
   ownerID: String,
-  username: String,
+  username: { type: String, text: true },
   discriminator: String,
   avatar: String,
   tags: [String],
@@ -19,5 +19,7 @@ const schema: mongoose.Schema = new mongoose.Schema({
   invite: String,
   date: Date
 })
+
+schema.path('username').index({ text: true })
 
 export default mongoose.model('bots', schema)
