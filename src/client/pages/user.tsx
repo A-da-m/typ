@@ -75,9 +75,9 @@ class User extends React.Component {
 
   render () {
     return (
-      <div className='column' style={{ paddingLeft: 0, overflowY: 'scroll' }}>
+      <div className='column' style={{ padding: 0, overflowY: 'scroll' }}>
         <div style={{ overflowY: 'scroll' }}>
-          <div className='image banner has-background-primary' style={{ objectFit: 'cover', border: 0, backgroundSize: 'cover' }} />
+        <div className='image banner has-background-primary' style={{ objectFit: 'cover', border: 0, backgroundImage: `url("${this.state.user ? this.state.user.banner : ''}")`, backgroundSize: 'cover', backgroundPosition: '50% 50%' }} />
           <div className='bot-body' style={{ marginBottom: '150px', marginTop: '50px' }}>
             <h1 className='has-text-white is-size-4'>{this.state.isUser && this.props.isAuthenticated ? <>Hello, <strong>{this.props.user.username}#{this.props.user.discriminator}</strong>!</> : `${this.state?.user?.username}#${this.state?.user?.discriminator}`}</h1>
             {this.state.user ? <Bots isUser={this.state.isUser} bots={this.state.bots} /> : <></>}

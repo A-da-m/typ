@@ -59,7 +59,7 @@ class Bot extends React.Component {
           {this.state.bot ?
             <>
               <div style={{ overflowY: 'scroll' }}>
-                <div className='image banner has-background-primary' style={{ objectFit: 'cover', border: 0, backgroundImage: `url("${this.state.bot.banner}")`, backgroundSize: 'cover' }} />
+                <div className='image banner has-background-primary' style={{ objectFit: 'cover', border: 0, backgroundImage: `url("${this.state.bot.banner}")`, backgroundSize: 'cover', backgroundPosition: '50% 50%' }} />
                 <div className='bot-body' style={{ marginBottom: '150px' }}>
                   <img className='image is-256x256' src={`https://cdn.discordapp.com/avatars/${this.state.bot.id}/${this.state.bot.avatar}.png?size=256`} style={{ borderRadius: '12px', boxShadow: '0 2px 9px 4px rgba(27,27,27,0.19)', backgroundColor: '#0a0a0a' }} />
                   <h1 className='has-text-white is-size-1' style={{ fontWeight: 900 }}>{this.state.bot.username}</h1>

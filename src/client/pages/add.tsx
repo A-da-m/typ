@@ -63,7 +63,7 @@ class Add extends React.Component {
 
   render () {
     return (
-      <div className='column' style={{ paddingLeft: 0, overflowY: 'scroll' }}>
+      <div className='column' style={{ padding: 0, overflowY: 'scroll' }}>
         <div style={{ overflowY: 'scroll' }}>
           <section className='hero is-medium is-primary is-bold'>
             <div className='hero-body' style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: '8rem', paddingBottom: '8rem' }}>

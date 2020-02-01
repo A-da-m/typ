@@ -20,6 +20,7 @@ const schema: mongoose.Schema = new mongoose.Schema({
   avatar: String,
   favorites: [favorites],
   collections: [collections],
+  banner: String,
   certified: { type: Boolean, default: false },
   admin: { type: Number, default: 0 }
 })

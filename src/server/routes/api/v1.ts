@@ -4,7 +4,7 @@ import fastify from 'fastify'
 import { Server, IncomingMessage, ServerResponse } from 'http'
 import axios from 'axios'
 import sanitize from '../../sanitize'
-
+const hookcord = require('hookcord')
 export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerResponse>, options: any, next: any) => {
   server.get('/bots', async (request: fastify.FastifyRequest, reply: fastify.FastifyReply<unknown>) => {
     const query: any = {}
@@ -77,7 +77,30 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
         }, query, {
           upsert: true
         })
-          .then(() => reply.send({ username: data.username, discriminator: data.discriminator, id: request.params.id }).code(200))
+          .then(() => {
+            new hookcord.Hook()
+              .login(process.env.HOOK_ID, process.env.HOOK_SECRET)
+              .setPayload({
+                'content': '<@&666799016679309312>',
+                'embeds': [{
+                  'title': request.body.new ? '**Bot Added**' : '**Bot Updated**',
+                  'description': `<@${request.session.user.id}> \`${request.session.user.username}#${request.session.user.discriminator}\` added <@${data.id}> \`${data.username}#${data.discriminator}\``,
+                  'fields': [{
+                    'name': 'Description',
+                    'value': request.body.description.short,
+                    'inline': true
+                  }, {
+                    'name': 'Link',
+                    'value': `https://typapp.co/bot/${data.id}`,
+                    'inline': true
+                  }],
+                  'timestamp': new Date()
+                }]
+              })
+              .fire()
+              .catch((error: Error) => { console.error(error) })
+            return reply.send({ username: data.username, discriminator: data.discriminator, id: request.params.id }).code(200)
+          })
           .catch(error => {
             console.log(error)
             return reply.send(error).code(500)
