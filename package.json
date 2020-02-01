@@ -21,6 +21,7 @@
     "fastify-oauth2": "^3.0.0",
     "fastify-session": "^3.2.0",
     "fastify-static": "^2.5.1",
+    "hapi-prerender": "^1.0.2",
     "is-empty": "^1.2.0",
     "mongoose": "^5.8.7",
     "react-bulma-components": "^3.1.3",

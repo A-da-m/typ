@@ -28,9 +28,9 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
 
   server.get('/bots/:id', async (request: fastify.FastifyRequest, reply: fastify.FastifyReply<unknown>) => {
     if (!request.params.id) return reply.send('Missing botID').code(400)
-    return bots.findOne({ id: request.params.id })
+    return bots.findOne({ id: sanitize(request.params.id) })
       .then((bot: any) => {
-        return users.findOne({ id: bot.ownerID })
+        return users.findOne({ id: sanitize(bot.ownerID) })
           .then((user: any) => {
             return reply.send({ bot, owner: { username: user?.username, discriminator: user?.discriminator, avatar: user?.avatar } })
           })
