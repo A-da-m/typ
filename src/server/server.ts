@@ -44,10 +44,12 @@ export default async (): Promise<fastify.FastifyInstance<Server, IncomingMessage
     store: Store(fastifySession),
     saveUninitialized: false
   })
-  server.register(fastifyRatelimit, {
-    max: 100,
-    timeWindow: '1 minute'
-  })
+  if (process.env.NODE_ENV === 'production') {
+    server.register(fastifyRatelimit, {
+      max: 100,
+      timeWindow: '1 minute'
+    })
+  }
   server.register(oauth2, {
     name: 'discordOAuth2',
     scope: ['identify'],

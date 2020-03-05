@@ -5,7 +5,7 @@ import { fetchState } from './redux/actions/auth'
 import { Provider } from 'react-redux'
 import store from './redux/store'
 
-import 'react-bulma-components/dist/react-bulma-components.min.css'
+// import 'react-bulma-components/dist/react-bulma-components.min.css'
 import '../../public/scss/index.scss'
 
 import Sidebar from './components/sidebar'
@@ -31,22 +31,24 @@ class App extends React.Component {
       <Provider store={store}>
         <Router>
           <Navbar />
-          <div className='App columns is-fullheight'>
+          <div>
             <Sidebar />
-            <Switch>
-              <React.Suspense fallback={<div></div>}>
-                <Route exact component={Bots} path='/' />
-                <Route exact component={Servers} path='/servers' />
-                <Route exact component={Servers} path='/search' />
-                <Route exact component={Privacy} path='/privacy' />
-                <Route exact component={Terms} path='/terms' />
-                <Route exact component={User} path='/user/:id' />
-                <Route exact component={Bot} path='/bot/:id' />
-                <Private exact component={Add} path='/bot' />
-                <Private exact component={Manage} path='/bot/:id/manage' />
-                <Private exact admin component={Queue} path='/queue' />
-              </React.Suspense>
-            </Switch>
+            <div className='typ-main'>
+              <Switch>
+                <React.Suspense fallback={<div></div>}>
+                  <Route exact component={Bots} path='/' />
+                  <Route exact component={Servers} path='/servers' />
+                  <Route exact component={Servers} path='/search' />
+                  <Route exact component={Privacy} path='/privacy' />
+                  <Route exact component={Terms} path='/terms' />
+                  <Route exact component={User} path='/user/:id' />
+                  <Route exact component={Bot} path='/bot/:id' />
+                  <Private exact component={Add} path='/bot' />
+                  <Private exact component={Manage} path='/bot/:id/manage' />
+                  <Private exact admin component={Queue} path='/queue' />
+                </React.Suspense>
+              </Switch>
+            </div>
           </div>
         </Router>
       </Provider>

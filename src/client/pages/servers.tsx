@@ -3,7 +3,7 @@ import * as React from 'react'
 class Servers extends React.Component {
   render () {
     return (
-      <div className='column' style={{ height: '100%', padding: '5%', textAlign: 'center', marginTop: 'auto', marginBottom: 'auto' }}>
+      <div className='typ-body' style={{ height: '100%', textAlign: 'center', marginTop: 'auto', marginBottom: 'auto' }}>
         <div className='hero is-fullheight'>
           <div className='hero-body' style={{ padding: 0 }}>
             <div className='container' style={{ top: '-50px' }}>

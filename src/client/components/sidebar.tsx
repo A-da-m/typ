@@ -17,7 +17,6 @@ class Sidebar extends React.Component {
       dropdown: false,
       search: false,
       searchQuery: null,
-      // redirect: null,
       invaildSearch: false
     }
 
@@ -40,55 +39,66 @@ class Sidebar extends React.Component {
 
   render () {
     return (
-      <div className='column is-narrow has-background-black has-text-centered is-fullheight is-hidden-mobile' style={{ height: '100%', paddingRight: 0, paddingLeft: 0, paddingTop: '3%' }}>
-        <div style={{ width: '110px' }}>
-          <div style={{ display: 'block' }}>
-            <h3 className='has-text-weight-bold has-text-white is-size-4'>typ</h3>
-            <aside className='menu'>
-              <p className='menu-label'>
-                List
-              </p>
-              <ul className='menu-list'>
-                <li><a href='/' style={{ paddingBottom: '2rem', paddingTop: '2rem' }}><FontAwesomeIcon icon={faRobot} size='2x'/></a></li>
-                <li><a href='/servers' style={{ paddingBottom: '2rem', paddingTop: '2rem' }}><FontAwesomeIcon icon={faUsers} size='2x'/></a></li>
-                <li><a onClick={() => this.setState({ search: !this.state.search })} style={{ paddingBottom: '2rem', paddingTop: '2rem' }}><FontAwesomeIcon icon={faSearch} size='2x'/></a></li>
-              </ul>
-            </aside>
-          </div>
-        </div>
-        {/* {this.state.redirect ? <Redirect to={this.state.redirect}/> : <></>}  */}
-        {this.state.search ? <div style={{ position: 'absolute', left: 120, zIndex: 1000, top: 328 }}>
-          <form onSubmit={this.onSubmit}>
-            <input className={`input ${this.state.invaildSearch ? 'is-danger' : ''}`} type='text' placeholder='Search' style={{ padding: 15 }} onChange={(event) => this.setState({ searchQuery: event.target.value })} />
-          </form>
-        </div> : <></>}
-        {this.props.isAuthenticated ?
-        <div className={`dropdown ${this.state.dropdown ? 'is-active' : ''} is-right`} style={{ position: 'absolute', right: 25, top: 25, borderRadius: '25px', width: '3rem', zIndex: 100 }}>
-          <div className='dropdown-trigger'>
-            <img style={{ borderRadius: '50%', cursor: 'pointer' }} onClick={() => this.setState({ dropdown: !this.state.dropdown })} src={this.props.user?.avatar ? `https://cdn.discordapp.com/avatars/${this.props.user.id}/${this.props.user.avatar}.png?size=256` : 'https://cdn.discordapp.com/embed/avatars/0.png'} />
-          </div>
-          <div className='dropdown-menu' id='dropdown-menu' role='menu'>
-            <div className='dropdown-content has-background-black'>
-              <p className='dropdown-item has-text-white'>
-                Logged in as <strong>{this.props.user.username}#{this.props.user.discriminator}</strong>
-              </p>
-              <hr className='dropdown-divider has-background-black-bis' />
-              <a href={`/user/${this.props.user.id}`} className='dropdown-item has-text-white'>
-                My Account
-              </a>
-              <a href='/bot' className='dropdown-item has-text-white'>
-                Add Bot
-              </a>
-              {this.props.user.admin ? <><hr className='dropdown-divider has-background-black-bis' /><a className='dropdown-item has-text-white' href='/queue'>Queue</a></> : <></>}
-              <hr className='dropdown-divider has-background-black-bis' />
-              <a href='/auth/logout' className='dropdown-item has-text-danger'>
-                Logout
-              </a>
-            </div>
-          </div>
-        </div>
-        : <a href='/auth/login' className='has-text-white'><FontAwesomeIcon style={{ position: 'absolute', right: 25, top: 25, borderRadius: '25px', width: '3rem', zIndex: 100 }} icon={faUser} size='2x'/></a>}
+      <>
+      <div className='typ-navbar has-background-black'>
+        <ul className='typ-navbar-nav'>
+          <li className='typ-navbar-logo'>
+            <img style={{ maxWidth: '5rem' }} src='/images/logo/typ-darktransparent.png' />
+          </li>
+          <li className='typ-navbar-item'>
+            <a className='typ-navbar-item-link' href='/'>
+              <FontAwesomeIcon icon={faRobot} size='2x'/>
+            </a>
+          </li>
+          <li className='typ-navbar-item'>
+            <a className='typ-navbar-item-link' href='/servers'>
+              <FontAwesomeIcon icon={faUsers} size='2x'/>
+            </a>
+          </li>
+          <li className='typ-navbar-item'>
+            <a className='typ-navbar-item-link' onClick={() => this.setState({ search: !this.state.search })}>
+              <FontAwesomeIcon icon={faSearch} size='2x'/>
+            </a>
+          </li>
+          <li className='typ-navbar-item'>
+            {this.props.isAuthenticated
+              ? (
+                <div className={`typ-navbar-dropdown dropdown is-up ${this.state.dropdown ? 'is-active' : ''}`} style={{ borderRadius: '25px', width: '3rem', zIndex: 9 }}>
+                  <div className='dropdown-trigger'>
+                    <img style={{ borderRadius: '50%', cursor: 'pointer' }} onClick={() => this.setState({ dropdown: !this.state.dropdown })} src={this.props.user?.avatar ? `https://cdn.discordapp.com/avatars/${this.props.user.id}/${this.props.user.avatar}.png?size=256` : 'https://cdn.discordapp.com/embed/avatars/0.png'} />
+                  </div>
+                </div>
+              )
+              : (
+                <a className='typ-navbar-item-link' href='/auth/login'>
+                  <FontAwesomeIcon icon={faUser} size='2x'/>
+                </a>
+              )
+            }
+          </li>
+        </ul>
       </div>
+      {this.state.dropdown ?
+        <div className='modal is-active'>
+          <div className='modal-background'></div>
+          <div className='modal-card has-background-black'>
+            <header className='modal-card-head has-background-link' style={{ border: 0 }}>
+              <p className='modal-card-title'><strong>Account</strong></p>
+              <button className='delete' aria-label='close' onClick={() => this.setState({ dropdown: !this.state.dropdown })}></button>
+            </header>
+            <section className='modal-card-body has-background-dark has-text-white' style={{ border: 0 }}>
+              Logged in as <strong>{this.props.user.username}#{this.props.user.discriminator}</strong>
+            </section>
+            <footer className='modal-card-foot has-background-dark' style={{ border: 0, paddingTop: 0 }}>
+              <a href='/auth/logout' className='button is-danger'>Logout</a>
+              <a href='/bot' className='button'>New Bot</a>
+              <a href={`/user/${this.props.user.id}`} className='button'>Current Bots</a>
+              {this.props.user.admin ? <a href='/queue' className='button is-link'>Queue</a> : <></>}
+            </footer>
+          </div>
+        </div>
+      : ''}
+      </>
     )
   }
 }
@@ -100,3 +110,37 @@ const mapStateToProps = (state: any) => ({
 })
 
 export default withRouter(connect(mapStateToProps)(Sidebar))
+
+//   {/* {this.state.redirect ? <Redirect to={this.state.redirect}/> : <></>}  */}
+//   {this.state.search ? <div style={{ position: 'absolute', left: 120, zIndex: 1000, top: 328 }}>
+//     <form onSubmit={this.onSubmit}>
+//       <input className={`input ${this.state.invaildSearch ? 'is-danger' : ''}`} type='text' placeholder='Search' style={{ padding: 15 }} onChange={(event) => this.setState({ searchQuery: event.target.value })} />
+//     </form>
+//   </div> : <></>}
+//   {this.props.isAuthenticated ?
+//   <div className={`dropdown ${this.state.dropdown ? 'is-active' : ''} is-right`} style={{ position: 'absolute', right: 25, top: 25, borderRadius: '25px', width: '3rem', zIndex: 100 }}>
+//     <div className='dropdown-trigger'>
+//       <img style={{ borderRadius: '50%', cursor: 'pointer' }} onClick={() => this.setState({ dropdown: !this.state.dropdown })} src={this.props.user?.avatar ? `https://cdn.discordapp.com/avatars/${this.props.user.id}/${this.props.user.avatar}.png?size=256` : 'https://cdn.discordapp.com/embed/avatars/0.png'} />
+//     </div>
+//     <div className='dropdown-menu' id='dropdown-menu' role='menu'>
+//       <div className='dropdown-content has-background-black'>
+//         <p className='dropdown-item has-text-white'>
+//           Logged in as <strong>{this.props.user.username}#{this.props.user.discriminator}</strong>
+//         </p>
+//         <hr className='dropdown-divider has-background-black-bis' />
+//         <a href={`/user/${this.props.user.id}`} className='dropdown-item has-text-white'>
+//           My Account
+//         </a>
+//         <a href='/bot' className='dropdown-item has-text-white'>
+//           Add Bot
+//         </a>
+//         {this.props.user.admin ? <><hr className='dropdown-divider has-background-black-bis' /><a className='dropdown-item has-text-white' href='/queue'>Queue</a></> : <></>}
+//         <hr className='dropdown-divider has-background-black-bis' />
+//         <a href='/auth/logout' className='dropdown-item has-text-danger'>
+//           Logout
+//         </a>
+//       </div>
+//     </div>
+//   </div>
+//   : <a href='/auth/login' className='has-text-white'><FontAwesomeIcon style={{ position: 'absolute', right: 25, top: 25, borderRadius: '25px', width: '3rem', zIndex: 100 }} icon={faUser} size='2x'/></a>}
+// </div>

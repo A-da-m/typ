@@ -1,4 +1,19 @@
+@charset "utf-8";
+
+$primary: #5b86ff;
+
+@import "../../node_modules/bulma/bulma.sass";
+
 $bg-dark: #262626;
+
+:root {
+  font-size: 16px;
+  overflow: hidden;
+}
+
+#root {
+  overflow: hidden;
+}
 
 html {
   box-sizing: normal !important;
@@ -7,8 +22,71 @@ html {
 body, html, .App, #root {
   background-color: $bg-dark;
   height: 100% !important;
-  overflow: hidden;
   margin: 0;
+  padding: 0;
+}
+
+.typ-main {
+  margin-left: 6rem;
+  padding: 0rem;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.typ-navbar {
+  position: fixed;
+  width: 6rem;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.typ-navbar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+  text-align: center;
+}
+
+.typ-navbar-logo {
+  text-transform: uppercase;
+  font-weight: 900;
+  margin-top: 1rem;
+  margin-bottom: 0rem;
+  text-align: center;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.typ-navbar-item {
+  width: 100%;
+}
+
+.typ-navbar-item:last-child {
+  margin-top: auto;
+}
+
+.typ-navbar-item-link {
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: 600ms;
+  filter: grayscale(100%) opacity(0.7);
+}
+
+.typ-navbar-item-link svg {
+  min-width: 3rem;
+  margin: 0 1.5rem;
+}
+
+.typ-navbar-item-link:hover {
+  filter: grayscale(0%) opacity(1);
+  background: #141414;
+  color: #5b86ff;
 }
 
 .file-cta, .file-name, .input, .select select, .textarea {
@@ -55,6 +133,14 @@ body, html, .App, #root {
 
 .input:hover, .is-hovered.input, .is-hovered.textarea, .select select.is-hovered, .select select:hover, .textarea:hover {
   border: 0;
+}
+
+.typ-body {
+  padding: 5rem;
+}
+
+.typ-navbar-dropdown {
+  margin-bottom: 25px;
 }
 
 @media (width: 1440px) {
@@ -124,6 +210,41 @@ body, html, .App, #root {
   }
 }
 
+
+// Small Screens
+@media only screen and (max-width: 600px) {
+  .typ-navbar {
+    bottom: 0;
+    width: 100vw;
+    height: 6rem;
+    z-index: 2;
+  }
+  .typ-navbar-item:last-child {
+    margin-top: 0;
+  }
+  .typ-navbar-dropdown {
+    margin-bottom: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  .typ-navbar-logo {
+    display: none;
+  }
+  .typ-navbar-nav {
+    flex-direction: row;
+  }
+  .typ-navbar-item-link {
+    justify-content: center;
+  }
+  .typ-main {
+    margin: 0;
+    height: auto;
+  }
+  .typ-body {
+    padding: 2rem;
+    margin-bottom: 6rem;
+  }
+}
 strong {
   color: #fff !important;
 }

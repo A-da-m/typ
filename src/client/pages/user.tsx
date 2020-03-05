@@ -12,7 +12,6 @@ const Bot = ({ bot }: any) => {
   return (
     <div className='column is-full-mobile is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd'>
       <div className='card' style={{ borderRadius: '12px', backgroundColor: '#171717' }} onClick={() => history.push(`/bot/${bot.id}`)}>
-        {/* <img src='/images/Adam.png' width='160' style={{ height: '100%', borderTopLeftRadius: '12px', borderBottomLeftRadius: '12px' }}/> */}
         <div className='card-content'>
           <div className='media' style={{ marginBottom: 0 }}>
             <div className='media-left'>
@@ -39,7 +38,7 @@ class Bots extends React.Component {
     return (
       <>
         <h1 className='has-text-white is-size-1' style={{ fontWeight: 900 }}>{this.props.isUser ? 'My Bots' : 'Bots'}</h1>
-        <div className='columns'>
+        <div className='columns' style={{ overflowX: 'scroll' }}>
           {this.props.bots.map((bot: any) => <Bot key={bot.id} bot={bot}/>)}
         </div>
       </>
@@ -75,10 +74,10 @@ class User extends React.Component {
 
   render () {
     return (
-      <div className='column' style={{ padding: 0, overflowY: 'scroll' }}>
+      <div>
         <div style={{ overflowY: 'scroll' }}>
         <div className='image banner has-background-primary' style={{ objectFit: 'cover', border: 0, backgroundImage: `url("${this.state.user ? this.state.user.banner : ''}")`, backgroundSize: 'cover', backgroundPosition: '50% 50%' }} />
-          <div className='bot-body' style={{ marginBottom: '150px', marginTop: '50px' }}>
+          <div className='typ-body bot-body' style={{ marginBottom: '150px', marginTop: '15px' }}>
             <h1 className='has-text-white is-size-4'>{this.state.isUser && this.props.isAuthenticated ? <>Hello, <strong>{this.props.user.username}#{this.props.user.discriminator}</strong>!</> : `${this.state?.user?.username}#${this.state?.user?.discriminator}`}</h1>
             {this.state.user ? <Bots isUser={this.state.isUser} bots={this.state.bots} /> : <></>}
           </div>

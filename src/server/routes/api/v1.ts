@@ -43,6 +43,13 @@ export default (server: fastify.FastifyInstance<Server, IncomingMessage, ServerR
   server.post('/bots/:id', async (request: fastify.FastifyRequest, reply: fastify.FastifyReply<unknown>) => {
     if (!request.session?.user) return reply.send('Unauthorized').code(401)
     if (!request.params.id || !request.body.description?.short || !request.body.description?.long || request.body.new) return reply.send('Missing content').code(400)
+    if (request.body.new) {
+      await axios.get(`https://discordapp.com/api/guilds/${process.env.GUILD_ID}/members/${request.session.id}`)
+        .then((result) => {
+          if (!result?.data?.user?.id) return reply.send('Must be in discord server.').code(500)
+        })
+        .catch(error => reply.send(error).code(500))
+    }
     return axios.get(`https://discordapp.com/api/users/${request.params.id}`, {
       headers: {
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`

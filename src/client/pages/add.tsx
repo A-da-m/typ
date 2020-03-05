@@ -63,21 +63,21 @@ class Add extends React.Component {
 
   render () {
     return (
-      <div className='column' style={{ padding: 0, overflowY: 'scroll' }}>
+      <div style={{ overflowY: 'scroll' }}>
         <div style={{ overflowY: 'scroll' }}>
           <section className='hero is-medium is-primary is-bold'>
             <div className='hero-body' style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: '8rem', paddingBottom: '8rem' }}>
               <div className='container'>
-                <h1 className='title' style={{ fontWeight: 900 }}>
+                <h1 className='title' style={{ fontWeight: 900, color: '#ffffff' }}>
                   Add Bot
                 </h1>
-                <h2 className='subtitle'>
+                <h2 className='subtitle' style={{ color: '#ffffff' }}>
                   Add your bot, grow your bot.
                 </h2>
               </div>
             </div>
           </section>
-          <div style={{ marginBottom: '150px', padding: '5%', paddingTop: 30 }} className='columns'>
+          <div style={{ marginBottom: '150px', padding: '5%', paddingTop: 30 }} className='columns typ-body'>
             <div className='column'>
               {this.state.submitted ? <div className='notification is-primary is-light'>Successfully submitted: <strong>{this.state.submitted.username}#{this.state.submitted.discriminator}</strong></div> : <></>}
               <div className='field'>

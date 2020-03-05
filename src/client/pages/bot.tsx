@@ -55,12 +55,12 @@ class Bot extends React.Component {
           url={this.state.bot ? `https://typapp.co/${this.state.bot.id}` : null}
           image={this.state.bot ? `https://cdn.discordapp.com/avatars/${this.state.bot.id}/${this.state.bot.avatar}.png?size=256` : null}
         />
-        <div className='column' style={{ paddingLeft: 0, overflowY: 'scroll', padding: 0 }}>
+        <div style={{ height: '100%', overflowY: 'scroll' }}>
           {this.state.bot ?
             <>
               <div style={{ overflowY: 'scroll' }}>
                 <div className='image banner has-background-primary' style={{ objectFit: 'cover', border: 0, backgroundImage: `url("${this.state.bot.banner}")`, backgroundSize: 'cover', backgroundPosition: '50% 50%' }} />
-                <div className='bot-body' style={{ marginBottom: '150px' }}>
+                <div className='typ-body bot-body' style={{ padding: '5%', paddingTop: 0, marginBottom: '150px' }}>
                   <img className='image is-256x256' src={`https://cdn.discordapp.com/avatars/${this.state.bot.id}/${this.state.bot.avatar}.png?size=256`} style={{ borderRadius: '12px', boxShadow: '0 2px 9px 4px rgba(27,27,27,0.19)', backgroundColor: '#0a0a0a' }} />
                   <h1 className='has-text-white is-size-1' style={{ fontWeight: 900 }}>{this.state.bot.username}</h1>
                   <h3 className='is-size-4 has-text-grey'>{this.state.bot.description.short}</h3>

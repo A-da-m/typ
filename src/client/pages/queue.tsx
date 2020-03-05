@@ -10,7 +10,7 @@ import Title from '../components/title'
 const Bot = ({ bot }: any) => {
   const history = useHistory()
   return (
-    <div className='column is-full-mobile is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd'>
+    <div className='is-full-mobile is-half-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd'>
       <div className='card' style={{ borderRadius: '12px', backgroundColor: '#171717' }} onClick={() => history.push(`/bot/${bot.id}`)}>
         <div className='card-content'>
           <div className='media' style={{ marginBottom: 0 }}>

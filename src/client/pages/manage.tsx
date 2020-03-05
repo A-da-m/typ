@@ -77,7 +77,7 @@ class Manage extends React.Component {
 
   render () {
     return (
-      <div className='column' style={{ padding: 0, overflowY: 'scroll' }}>
+      <div className='typ-body' style={{ overflowY: 'scroll' }}>
         {this.state.loading ? <></> :
           <div style={{ overflowY: 'scroll' }}>
             <section className='hero is-medium is-primary is-bold'>

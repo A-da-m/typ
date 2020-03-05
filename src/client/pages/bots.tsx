@@ -124,7 +124,7 @@ class Bots extends React.Component {
           url={null}
           image={null}
         />
-        <div className='column' style={{ height: '100%', padding: '5%', overflowY: 'scroll' }}>
+        <div className='typ-body' style={{ height: '100%', overflowY: 'scroll' }}>
           <h1 className='has-text-weight-normal has-text-grey-light is-size-3'>{this.props.loading ? <></> : <>Hello <strong className='has-text-grey-light has-text-weight-bold'>{this.props.isAuthenticated ? `${this.props.user.username}#${this.props.user.discriminator}` : 'there'}</strong>!</>}</h1>
           <Featured />
           <Trending />
